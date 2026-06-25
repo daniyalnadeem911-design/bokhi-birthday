@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Emergency: Bokhi Turned 23 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== WARNING MODAL ===================== -->
+<div class="modal-overlay" id="warningModal">
+  <div class="modal-box">
+    <div class="modal-siren">🚨</div>
+    <h2 class="modal-title">WARNING</h2>
+    <p class="modal-text">Today is the birthday of <strong>Aden Basra.</strong></p>
+    <p class="modal-text small">National snack reserves are at risk. Proceed with celebration?</p>
+    <div class="modal-buttons">
+      <button class="btn btn-yes" id="modalYes">YES 🎉</button>
+      <button class="btn btn-yes-2" id="modalYesAbs">ABSOLUTELY YES 🎂</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CHAOS BACKGROUND ===================== -->
+<div class="chaos-layer" id="chaosLayer" aria-hidden="true"></div>
+
+<!-- ===================== CANVAS CONFETTI ===================== -->
+<canvas id="confettiCanvas"></canvas>
+
+<!-- ===================== NAV TICKER ===================== -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>🚨 BREAKING NEWS 🚨&nbsp; Bokhi spotted eating snacks again. &nbsp;•&nbsp; Moti detected near a food stall. &nbsp;•&nbsp; Boni successfully ignored Computer Science for the 23rd year. &nbsp;•&nbsp; Teacher by profession, foodie by passion. &nbsp;•&nbsp; Height: small. Personality: huge. &nbsp;•&nbsp; Local CS student still "doesn't like CS," refuses to elaborate. &nbsp;•&nbsp;</span>
+    <span aria-hidden="true">🚨 BREAKING NEWS 🚨&nbsp; Bokhi spotted eating snacks again. &nbsp;•&nbsp; Moti detected near a food stall. &nbsp;•&nbsp; Boni successfully ignored Computer Science for the 23rd year running. &nbsp;•&nbsp; Teacher by profession, foodie by passion. &nbsp;•&nbsp; Height: small. Personality: huge. &nbsp;•&nbsp; Local CS student still "doesn't like CS," refuses to elaborate. &nbsp;•&nbsp;</span>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <p class="eyebrow">🚨 EMERGENCY BROADCAST 🚨</p>
+    <h1 class="hero-title">HAPPY BIRTHDAY<br><span class="highlight">BOKHI</span> 🎂</h1>
+    <p class="hero-subtitle">Breaking News: Aden Basra has officially survived 23 years of eating everything she sees.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-music" id="musicToggle">🔈 Play Birthday Chaos Music</button>
+      <!--<a href="#wish" class="btn btn-scroll">Scroll for the chaos ⬇️</a>-->
+    </div>
+  </div>
+  <div class="hero-emoji-rain" aria-hidden="true"></div>
+</section>
+
+<!-- ===================== HERO CHARACTER ===================== -->
+<section class="character-section">
+  <p class="section-eyebrow">Exhibit A</p>
+  <h2 class="section-title">The Suspect Has Been Identified</h2>
+
+  <div class="character-frame-wrap">
+    <div class="food-orbit" aria-hidden="true">
+      <span>🍕</span><span>🍔</span><span>🍟</span><span>🌮</span><span>🍩</span><span>🍪</span><span>🍫</span>
+    </div>
+
+    <div class="wanted-poster" id="adenPhoto" title="Click me 5 times... if you dare">
+      <p class="poster-label">WANTED</p>
+      <div class="poster-photo">
+        <img src="assets/aden.jpg" alt="Aden Basra" onerror="this.style.display='none'; this.parentElement.querySelector('.poster-fallback').style.display='flex';">
+        <div class="poster-fallback">📸<br><span>Drop aden.jpg into /assets</span></div>
+      </div>
+      <p class="poster-name">ADEN BASRA</p>
+      <p class="poster-alias">a.k.a. Bokhi / Moti / Boni</p>
+      <p class="poster-charge">CHARGED WITH: Crimes against Computer Science<br>and eating too much</p>
+      <span class="poster-stamp">OFFICIAL Bokhi</span>
+    </div>
+  </div>
+  <p class="hint-text">(psst. click the poster a few times)</p>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="stats-section">
+  <p class="section-eyebrow">Verified Intelligence Report</p>
+  <h2 class="section-title">Official Stats</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <p class="stat-label">Age</p>
+      <p class="stat-value">23 years</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">Height</p>
+      <p class="stat-value">apni soch say bhi choti™</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">Occupation</p>
+      <p class="stat-value">Teacher</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">Special Skill</p>
+      <p class="stat-value">Finding food anywhere</p>
+    </div>
+    <div class="stat-card stat-card-wide">
+      <p class="stat-label">CS Knowledge</p>
+      <div class="progress-track">
+        <div class="progress-fill progress-cs" data-target="3"></div>
+      </div>
+      <p class="stat-value-sm">Loading... 3%</p>
+    </div>
+    <div class="stat-card stat-card-wide">
+      <p class="stat-label">Food Knowledge</p>
+      <div class="progress-track">
+        <div class="progress-fill progress-food" data-target="100"></div>
+      </div>
+      <p class="stat-value-sm">9999% (scale broke)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ROAST BUTTONS ===================== -->
+<section class="roast-section">
+  <p class="section-eyebrow">Interactive Investigation Unit</p>
+  <h2 class="section-title">Tap For The Truth</h2>
+  <p class="section-sub">Press a button. Receive a verdict. No appeals.</p>
+
+  <div class="roast-grid">
+    <div class="roast-card">
+      <p class="roast-icon">🔍</p>
+      <h3>Reality Check</h3>
+      <p class="roast-output" id="output-reality">Tap below for an unfiltered verdict.</p>
+      <button class="btn btn-roast" data-target="reality">Reality Check</button>
+    </div>
+
+    <div class="roast-card">
+      <p class="roast-icon">📡</p>
+      <h3>Food master</h3>
+      <p class="roast-output" id="output-food">Scanning for nearby snacks...</p>
+      <button class="btn btn-roast" data-target="food">Scan For Food</button>
+    </div>
+
+    <div class="roast-card">
+      <p class="roast-icon">📏</p>
+      <h3>Height Detector</h3>
+      <p class="roast-output" id="output-height">Sensor calibrating...</p>
+      <button class="btn btn-roast" data-target="height">Detect Height</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BIRTHDAY WISH ===================== -->
+<section class="wish-section" id="wish">
+  <div class="wish-hearts" aria-hidden="true">💖💕💗💓💞</div>
+  <p class="section-eyebrow">A Brief Moment Of Sincerity</p>
+  <h2 class="wish-title">Happy Birthday, Aden Basra.</h2>
+  <p class="wish-text">
+    By the way tunay is duniya per peda hokar boj hi bani hia
+    kabhi sonay kay ilawa kaam bhi kar liya kar kaam chor aurat. pakistan ki gurbat meh tunay
+    izafa kia hua hia
+  </p>
+  <p class="wish-text">
+    on other side may Allah bring happiness and joy to every aspect of life
+    or tujay Allah hidayat dy
+  </p>
+  <p class="wish-signoff">Stay awesome, Bokhi and Boni. 🎈</p>
+</section>
+
+<!-- ===================== ACHIEVEMENTS ===================== -->
+<section class="achievements-section">
+  <p class="section-eyebrow">Hall Of Fame</p>
+  <h2 class="section-title">Achievements Unlocked</h2>
+  <div class="achievements-grid">
+    <div class="badge-card"><span class="badge-icon">🏆</span><p>Completed 23 Levels of Life</p></div>
+    <div class="badge-card"><span class="badge-icon">🍩</span><p>Master of Snacks</p></div>
+    <div class="badge-card"><span class="badge-icon">🎁</span><p>Professional Birthday Receiver</p></div>
+    <div class="badge-card"><span class="badge-icon">📚</span><p>Teacher of the Year (Self-Proclaimed)</p></div>
+    <div class="badge-card"><span class="badge-icon">🕵️</span><p>Certified Food Hunter</p></div>
+    <div class="badge-card"><span class="badge-icon">💻</span><p>Survived a CS Degree She "Doesn't Like"</p></div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CELEBRATION ===================== -->
+<section class="finale-section">
+  <p class="section-eyebrow">The Grand Finale</p>
+  <h2 class="finale-title">One Button. Maximum Chaos.</h2>
+  <button class="btn btn-finale" id="finaleBtn">🎉 Launch Ultimate Birthday Celebration 🎉</button>
+  <div class="finale-message" id="finaleMessage">HAPPY 23RD BIRTHDAY BOKHI ❤️</div>
+</section>
+
+<!-- ===================== SECRET MODAL ===================== -->
+<div class="modal-overlay" id="secretModal">
+  <div class="modal-box secret-box">
+    <p class="modal-siren">🔓</p>
+    <h2 class="modal-title secret-title">Secret Unlocked</h2>
+    <p class="modal-text">Bokhi Supreme Edition™</p>
+    <p class="modal-text small">Achievement granted for excessive curiosity. Just like your snack habits.</p>
+    <button class="btn btn-yes" id="secretClose">Okay fine 🎉</button>
+  </div>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <p>Built with friendship, memes, and zero serious intentions.</p>
+  <p class="footer-sub">For Aden Basra 🎂</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

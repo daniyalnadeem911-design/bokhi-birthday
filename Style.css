@@ -1,0 +1,520 @@
+/* ============================================================
+   BOKHI BIRTHDAY CHAOS 2026 — STYLES
+   Palette: Pink #FF5C97 · Purple #7C3AED · Yellow #FFD23F
+            Orange #FF8A3D · Cream #FFF8EE · Ink #2B1B3D
+   ============================================================ */
+
+:root {
+  --pink: #ff5c97;
+  --pink-soft: #ffd6e6;
+  --purple: #7c3aed;
+  --purple-deep: #4c1d95;
+  --yellow: #ffd23f;
+  --orange: #ff8a3d;
+  --cream: #fff8ee;
+  --ink: #2b1b3d;
+  --white: #ffffff;
+
+  --shadow-soft: 0 10px 30px rgba(124, 58, 237, 0.18);
+  --shadow-pop: 0 14px 0 0 rgba(43, 27, 61, 0.85);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+
+  --font-display: 'Baloo 2', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0; }
+
+img { max-width: 100%; display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   BUTTONS (shared)
+   ============================================================ */
+.btn {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 14px 28px;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 6px 0 0 var(--ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 9px 0 0 var(--ink); }
+.btn:active { transform: translateY(2px); box-shadow: 0 3px 0 0 var(--ink); }
+.btn:focus-visible { outline: 3px dashed var(--purple); outline-offset: 3px; }
+
+.btn-yes, .btn-yes-2 { background: var(--yellow); }
+.btn-yes-2 { background: var(--pink); color: var(--white); }
+.btn-music { background: var(--purple); color: var(--white); }
+.btn-scroll { background: var(--white); }
+.btn-roast { background: var(--orange); color: var(--white); width: 100%; margin-top: 14px; }
+.btn-finale {
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: var(--white);
+  font-size: 1.25rem;
+  padding: 20px 40px;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(43, 27, 61, 0.78);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 999;
+  padding: 20px;
+  opacity: 1;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.modal-box {
+  background: var(--cream);
+  border: 4px solid var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: var(--shadow-pop);
+  animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-siren { font-size: 3rem; animation: wiggle 0.6s ease-in-out infinite; }
+.modal-title { font-size: 2rem; color: var(--pink); letter-spacing: 1px; }
+.secret-title { color: var(--purple); }
+.modal-text { font-size: 1.05rem; margin: 10px 0; }
+.modal-text.small { font-size: 0.9rem; opacity: 0.8; }
+.modal-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+
+@keyframes pop-in {
+  0% { transform: scale(0.7) rotate(-4deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+
+/* ============================================================
+   CHAOS BACKGROUND + CONFETTI CANVAS
+   ============================================================ */
+.chaos-layer {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.chaos-item {
+  position: absolute;
+  font-size: 2rem;
+  top: -10%;
+  will-change: transform;
+  animation-name: fall-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes fall-drift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(var(--drift, 40px), 115vh) rotate(360deg); }
+}
+
+#confettiCanvas {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 998;
+}
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker-wrap {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--ink);
+  color: var(--yellow);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-bottom: 3px solid var(--pink);
+}
+.ticker {
+  display: inline-flex;
+  animation: ticker-scroll 32s linear infinite;
+}
+.ticker span { padding-right: 0; }
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 80px 20px 60px;
+  background: linear-gradient(160deg, var(--pink) 0%, var(--purple) 55%, var(--purple-deep) 100%);
+  color: var(--white);
+  overflow: hidden;
+  z-index: 2;
+}
+.hero-content { position: relative; z-index: 3; max-width: 720px; animation: rise-in 0.9s ease both; }
+@keyframes rise-in {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.eyebrow {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+.hero-title {
+  font-size: clamp(2.6rem, 9vw, 5rem);
+  line-height: 1.05;
+  text-shadow: 0 6px 0 rgba(43,27,61,0.4);
+}
+.hero-title .highlight {
+  color: var(--yellow);
+  display: inline-block;
+  animation: tilt-bounce 2.4s ease-in-out infinite;
+}
+@keyframes tilt-bounce {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  50% { transform: rotate(2deg) translateY(-6px); }
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 2.6vw, 1.25rem);
+  margin: 22px auto 32px;
+  max-width: 560px;
+  opacity: 0.95;
+}
+.hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.hero-emoji-rain { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+
+/* ============================================================
+   SECTION GENERICS
+   ============================================================ */
+section { padding: 90px 20px; position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
+.section-eyebrow {
+  text-align: center;
+  font-family: var(--font-display);
+  color: var(--purple);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+  margin: 0 0 8px;
+}
+.section-title {
+  text-align: center;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.section-sub { text-align: center; opacity: 0.75; max-width: 480px; margin: 0 auto 40px; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   CHARACTER / WANTED POSTER
+   ============================================================ */
+.character-section { text-align: center; }
+.character-frame-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.food-orbit {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.food-orbit span {
+  position: absolute;
+  font-size: 1.8rem;
+  animation: orbit-float 6s ease-in-out infinite;
+}
+.food-orbit span:nth-child(1) { top: 0%;  left: 6%;  animation-delay: 0s; }
+.food-orbit span:nth-child(2) { top: 10%; right: 4%; animation-delay: 0.6s; }
+.food-orbit span:nth-child(3) { top: 45%; left: -2%; animation-delay: 1.2s; }
+.food-orbit span:nth-child(4) { top: 50%; right: -2%; animation-delay: 1.8s; }
+.food-orbit span:nth-child(5) { bottom: 8%; left: 8%; animation-delay: 2.4s; }
+.food-orbit span:nth-child(6) { bottom: 0%; right: 10%; animation-delay: 3s; }
+.food-orbit span:nth-child(7) { top: 28%; left: 50%; animation-delay: 3.6s; }
+@keyframes orbit-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(12deg); }
+}
+
+.wanted-poster {
+  background: var(--cream);
+  border: 5px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 26px 30px 30px;
+  width: min(320px, 80vw);
+  box-shadow: var(--shadow-pop);
+  position: relative;
+  cursor: pointer;
+  animation: gentle-bob 4s ease-in-out infinite, tilt-occasional 7s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+.wanted-poster:hover { transform: scale(1.03); }
+@keyframes gentle-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes tilt-occasional { 0%, 92%, 100% { rotate: 0deg; } 95% { rotate: -2deg; } }
+
+.poster-label {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 4px;
+  color: var(--pink);
+  margin: 0 0 10px;
+}
+.poster-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 4px solid var(--ink);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, var(--pink-soft), var(--yellow));
+  position: relative;
+}
+.poster-photo img { width: 100%; height: 100%; object-fit: cover; }
+.poster-fallback {
+  display: none;
+  position: absolute; inset: 0;
+  flex-direction: column; align-items: center; justify-content: center;
+  font-size: 2.4rem; gap: 8px; text-align: center; padding: 10px;
+}
+.poster-fallback span { font-size: 0.75rem; font-family: var(--font-body); font-weight: 700; color: var(--ink); }
+.poster-name { font-family: var(--font-display); font-size: 1.3rem; margin: 4px 0 0; }
+.poster-alias { font-size: 0.85rem; opacity: 0.7; margin: 2px 0 12px; }
+.poster-charge { font-size: 0.8rem; line-height: 1.4; opacity: 0.85; }
+.poster-stamp {
+  position: absolute;
+  top: 12px; right: -10px;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transform: rotate(12deg);
+  box-shadow: 0 4px 0 rgba(43,27,61,0.4);
+}
+.hint-text { margin-top: 18px; font-size: 0.85rem; opacity: 0.55; font-style: italic; }
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.stat-card {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 22px 18px;
+  text-align: center;
+  box-shadow: 0 7px 0 0 var(--ink);
+  transition: transform 0.2s ease;
+}
+.stat-card:hover { transform: translateY(-6px) rotate(-1deg); }
+.stat-card-wide { grid-column: span 2; text-align: left; }
+.stat-label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--purple);
+  margin: 0 0 8px;
+}
+.stat-value { font-family: var(--font-display); font-size: 1.3rem; margin: 0; }
+.stat-value-sm { font-family: var(--font-display); font-size: 0.85rem; margin: 8px 0 0; }
+.progress-track {
+  width: 100%; height: 14px;
+  background: var(--pink-soft);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+}
+.progress-fill {
+  height: 100%; width: 0%;
+  border-radius: 999px;
+  transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.progress-cs { background: var(--purple); }
+.progress-food { background: linear-gradient(90deg, var(--orange), var(--pink)); }
+
+/* ============================================================
+   ROAST BUTTONS
+   ============================================================ */
+.roast-section { text-align: center; }
+.roast-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 20px;
+}
+.roast-card {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 26px 20px;
+  box-shadow: 0 7px 0 0 var(--ink);
+  text-align: center;
+}
+.roast-icon { font-size: 2rem; margin: 0 0 4px; }
+.roast-card h3 { font-size: 1.1rem; margin-bottom: 12px; }
+.roast-output {
+  min-height: 64px;
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex; align-items: center; justify-content: center;
+  direction: rtl;
+  font-family: 'Nunito', system-ui, sans-serif;
+}
+
+/* ============================================================
+   WISH SECTION
+   ============================================================ */
+.wish-section {
+  text-align: center;
+  background: linear-gradient(160deg, var(--pink-soft), var(--cream));
+  border-radius: 40px;
+  max-width: 900px;
+  position: relative;
+  overflow: hidden;
+}
+.wish-hearts {
+  font-size: 1.6rem;
+  letter-spacing: 14px;
+  opacity: 0.6;
+  margin-bottom: 14px;
+  animation: heart-pulse 2.4s ease-in-out infinite;
+}
+@keyframes heart-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+.wish-title { font-size: clamp(1.8rem, 5vw, 2.4rem); color: var(--pink); margin-bottom: 22px; }
+.wish-text { max-width: 600px; margin: 0 auto 16px; line-height: 1.7; font-size: 1.05rem; }
+.wish-signoff { font-family: var(--font-display); font-size: 1.3rem; color: var(--purple); margin-top: 18px; }
+
+/* ============================================================
+   ACHIEVEMENTS
+   ============================================================ */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.badge-card {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  text-align: center;
+  box-shadow: 0 7px 0 0 var(--ink);
+  transition: transform 0.25s ease;
+}
+.badge-card:hover { transform: scale(1.05) rotate(-1deg); }
+.badge-icon { font-size: 2.2rem; display: block; margin-bottom: 10px; }
+.badge-card p { margin: 0; font-weight: 700; font-size: 0.95rem; }
+
+/* ============================================================
+   FINALE
+   ============================================================ */
+.finale-section {
+  text-align: center;
+  padding-bottom: 60px;
+}
+.finale-title { font-size: clamp(1.6rem, 4.5vw, 2.2rem); margin-bottom: 26px; }
+.finale-message {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 6vw, 3rem);
+  color: var(--pink);
+  margin-top: 30px;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.finale-message.show { opacity: 1; transform: scale(1); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  text-align: center;
+  padding: 36px 20px 50px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  position: relative;
+  z-index: 2;
+}
+.footer-sub { margin-top: 4px; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 760px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-card-wide { grid-column: span 2; }
+  .roast-grid { grid-template-columns: 1fr; }
+  .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+  section { padding: 70px 16px; }
+}
+
+@media (max-width: 420px) {
+  .achievements-grid { grid-template-columns: 1fr; }
+  .modal-box { padding: 30px 22px; }
+}
