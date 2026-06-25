@@ -48,8 +48,8 @@ local file access for things like `fetch`):
    git init
    git add .
    git commit -m "Initial commit: Bokhi Birthday Chaos 2026"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/bokhi-birthday.git
+   git commit -m "Initial commit: Bokhi Birthday Chaos 2026"
+   git remote add origin https://github.com/daniyalnadeem911-design/bokhi-birthday.git
    git push -u origin main
    ```
 
